@@ -1,0 +1,8 @@
+streamlit
+keras 
+matplotlib
+seaborn
+Pillow
+tensorflow==2.8.2
+pydicom
+opencv-python
