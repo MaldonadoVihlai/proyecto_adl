@@ -3,6 +3,6 @@ keras
 matplotlib
 seaborn
 Pillow
-tensorflow==2.8.2
 pydicom
-opencv-python
+opencv-python-headless
+protobuf==3.9.2
