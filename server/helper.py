@@ -30,7 +30,7 @@ def load_dicom_image(path, img_size=constants.SIZE):
     return data
 
 
-def load_dicom_images_3d(scan_id, num_imgs=constants.NUM_IMAGES, img_size=constants.SIZE, mri_type="FLAIR"):
+def load_dicom_images_3d(scan_id, num_imgs=constants.NUM_IMAGES, img_size=constants.SIZE, mri_type="T2w"):
     files = sorted(glob.glob(constants.EXTRACTION_DIRECTORY+f"/{scan_id}/{mri_type}/*.dcm"),
                    key=lambda var: [int(x) if x.isdigit() else x for x in re.findall(r'[^0-9]|[0-9]+', var)])
     middle = len(files)//2
@@ -66,7 +66,7 @@ def pred_dataset(ds_train, model):
 
     for images in ds_train:
         y_pred.extend(model.predict(
-            images, verbose=0).round().astype(int).tolist())
+            images, verbose=0).astype(float).tolist())
     return y_pred
 
 
@@ -75,10 +75,7 @@ def process_dataset():
     return pred_dataset(ds_train, model)
 
 def get_mgmt_state(state):
-    if state == 1:
-        return '### **De acuerdo al modelo el paciente cuenta con la enzima MGMT**'
-    else:
-        return '### **De acuerdo al modelo el paciente No cuenta con la enzima MGMT**'
+    return '### **De acuerdo al modelo el paciente cuenta con una probabilidad  de '+ str(round(state, 3)) + ' de tener la enzima MGMT**'
 
 
 def st_directory_picker(initial_path=Path()):
