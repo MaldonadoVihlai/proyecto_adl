@@ -4,4 +4,4 @@ MRI_TYPES = ['FLAIR','T1w','T1wCE','T2w']
 SIZE = 256
 NUM_IMAGES = 64
 BATCH_SIZE = 8
-MODEL = 'clasificador_propio_base.h5'
+MODEL = 'best_clasificador_propionew.h5'
